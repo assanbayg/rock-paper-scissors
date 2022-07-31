@@ -29,7 +29,7 @@ function game(){
         console.log(`This is round number ${i+1}!`);
         let computerSelection = getComputerChoice();
         let playerSelection = prompt("What is your choice?").toLowerCase();
-        playRound();
+        playRound(computerSelection, playerSelection);
     }
     console.log("END OF A GAME");
 }

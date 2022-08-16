@@ -17,19 +17,55 @@ function playRound(computerSelection, playerSelection){
     || (computerSelection == "paper" && playerSelection == "scissors")
     || (computerSelection == "scissors" && playerSelection == "rock")
     ){
+        playerScore++;
         console.log("YOU WIN!");
     }
     else {
+        computerScore++;
         console.log("YOU LOSE!");
     }
+    rounds++;
+    if(rounds === 5){
+        if(playerScore > computerScore){
+            winnerDisplay.textContent = "Winner is you!";
+        }
+        else{
+            winnerDisplay.textContent = "Winner is computer!";
+        }
+    }
+    scoreDisplay.textContent = `${playerScore} : ${computerScore}`;
 }
 
 function game(){
-    for(let i = 0; i < 5; i++){
-        console.log(`This is round number ${i+1}!`);
-        let computerSelection = getComputerChoice();
-        let playerSelection = prompt("What is your choice?").toLowerCase();
-        playRound(computerSelection, playerSelection);
-    }
-    console.log("END OF A GAME");
+    computerSelection = getComputerChoice();
+    playerSelectionDisplay.textContent = `Player Selection is ${playerSelection}`;
+    computerSelectionDisplay.textContent = `Computer Selection is ${computerSelection}`;
+    playRound(playerSelection, computerSelection);
 }
+
+let playerSelection, playerScore = 0;
+let computerSelection, computerScore = 0;
+let rounds = 0;
+const playerSelectionDisplay = document.querySelectorAll("h2")[0];
+const computerSelectionDisplay = document.querySelectorAll("h2")[1];
+const scoreDisplay = document.getElementById("score");
+const winnerDisplay = document.getElementById("winner");
+
+const rockButton = document.getElementById("rock");
+const paperButton = document.getElementById("paper");
+const scissorsButton = document.getElementById("scissors");
+
+rockButton.addEventListener("click", function(e) {
+    playerSelection = "rock";
+    game();
+});
+
+paperButton.addEventListener("click", function(e){
+    playerSelection = "paper";
+    game();
+})
+
+scissorsButton.addEventListener("click", function(e){
+    playerSelection = "scissors";
+    game();
+})
